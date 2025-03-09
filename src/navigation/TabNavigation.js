@@ -1,18 +1,16 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import AccountScreen from '../screens/AccountScreen';
 import PokedexScreen from '../screens/PokedexScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
-import PokemonScreen from '../screens/Pokemon'; 
 
-const Stack = createStackNavigator();
+
 const Tab = createBottomTabNavigator();
 
-// 🔹 Definir opciones para el Tab Navigator
+// Definir opciones para el Tab Navigator
 const screensOptions = [
     {
         name: 'Favorite',
@@ -38,20 +36,8 @@ const screensOptions = [
     },
 ];
 
-// 🔹 Stack Navigator que envuelve el Tab Navigator
-const AppStack = () => (
-    <Stack.Navigator>
-        <Stack.Screen
-            name="Main"
-            component={TabNavigation}
-            options={{ headerShown: false }} // Ocultar encabezado
-        />
-        <Stack.Screen name="Pokemon" component={PokemonScreen} />
-    </Stack.Navigator>
-);
-
-// 🔹 Tab Navigation
-function TabNavigation() {
+// Tab Navigation
+export default function TabNavigation() {
     return (
         <Tab.Navigator>
             {screensOptions.map((screen, index) => (
@@ -79,5 +65,3 @@ function renderPokeball() {
     );
 }
 
-// 🔹 Exportar la navegación principal con `AppStack`
-export default AppStack;
