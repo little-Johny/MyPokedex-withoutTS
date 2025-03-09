@@ -1,10 +1,11 @@
 import { View, Text, Button } from 'react-native'
 import React from 'react'
 
-export default function FavoritesScreen() {
+export default function Pokemon() {
     return (
         <View>
-            <Text>FavoritesScreen</Text>
+            <Text>We stay looking a Pokemon</Text>
+            
         </View>
     )
 }
