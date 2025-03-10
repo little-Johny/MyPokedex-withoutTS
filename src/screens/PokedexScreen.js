@@ -1,6 +1,7 @@
 import { Button, SafeAreaView, Text } from 'react-native'
 import React, { useState, useEffect } from 'react';
 import { getPokemonsApi, getPokemonDetailByUrlApi } from '../api/pokemon';
+import PokemonList from '../components/PokemonList';
 
 
 export default function PokedexScreen(props) {
@@ -44,6 +45,7 @@ export default function PokedexScreen(props) {
     return (
         <SafeAreaView>
             <Text>PokedexScreen</Text> 
+            <PokemonList items={pokemons}/>
             <Button onPress={goToPokemon} title='Pokemon'/>
         </SafeAreaView>
     )
