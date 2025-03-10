@@ -11,3 +11,12 @@ export async function getPokemonsApi() {
         throw error;
     }
 }
+
+export async function getPokemonDetailByUrlApi(url) {
+    try {
+        const response = await fetch(url);
+        return await response.json();
+    } catch (error) {
+        throw (error);
+    }
+}

@@ -1,9 +1,11 @@
 import { Button, SafeAreaView, Text } from 'react-native'
 import React, { useState, useEffect } from 'react';
-import { getPokemonsApi } from '../api/pokemon';
+import { getPokemonsApi, getPokemonDetailByUrlApi } from '../api/pokemon';
 
 
 export default function PokedexScreen(props) {
+    const [ pokemons, setPokemons ] = useState([]);
+    console.log(pokemons);
     useEffect(() =>{
         (async () => {
             await loadPokemons();
@@ -13,7 +15,23 @@ export default function PokedexScreen(props) {
     const loadPokemons = async () => {
         try {
             const response = await getPokemonsApi();
-            console.log(response);
+            const pokemonArray = [];
+
+            for await (const pokemon of response.results ) {
+                /* console.log(pokemon); */
+                const pokemonDetail = await getPokemonDetailByUrlApi(pokemon.url);
+                /* console.log(pokemonDetail); */
+
+                pokemonArray.push({
+                    id: pokemonDetail.id,
+                    name: pokemonDetail.name,
+                    type: pokemonDetail.types[0].type.name,
+                    order: pokemonDetail.order,
+                    image: pokemonDetail.sprites.other['official-artwork'].front_default,
+                });
+            }
+
+            setPokemons([...pokemons, ...pokemonArray]);
         } catch (error) {
             console.error(error);
         }
