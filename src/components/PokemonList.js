@@ -1,18 +1,18 @@
-import { Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet, FlatList } from 'react-native'
 import React from 'react'
-import { FlatList } from 'react-native-gesture-handler';
+import PokeCard from './PokeCard';
 
 
 
 export default function PokemonList({ items }) {
-    console.log('pokelist:' + items);
+    console.log('pokelist:',items);
     return (
         <FlatList
             data={items}
             numColumns={2}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item) => String(item.id)}
-            renderItem={({item}) => <Text>{item.name}</Text>}
+            renderItem={({item}) => <PokeCard pokeinfo={item}/>}
             contentContainerStyle= { style.flatListContentContainer }
         />
     )

@@ -26,7 +26,7 @@ export default function PokedexScreen(props) {
                 pokemonArray.push({
                     id: pokemonDetail.id,
                     name: pokemonDetail.name,
-                    type: pokemonDetail.types[0].type.name,
+                    type: pokemonDetail.types.map(typeInfo => typeInfo.type.name),
                     order: pokemonDetail.order,
                     image: pokemonDetail.sprites.other['official-artwork'].front_default,
                 });
