@@ -8,19 +8,23 @@ export default function PokedexScreen() {
     const [ pokemons, setPokemons ] = useState([]);
     const [ nextUrl, setNextUrl ] = useState(null);
     const [ loading, setLoading ] = useState(false);
-    console.log(pokemons);
+    useEffect(() => {
+        console.log(`Pokemons updated`, pokemons);
+    }, [pokemons]);
+
     useEffect(() =>{
         loadPokemons();
     }, []);
 
     const loadPokemons = useCallback( async () => {
         if(loading) return; //Evitamos llamadas innecesarias  si ya esta cargando
+        setLoading(true);
 
         try {
-            setLoading(true);
             const { results: pokemonResponse, next: nextPokemonListUrl } = await getPokemonsApi(nextUrl);
             /* console.log(pokemonResponse,`next:`, nextPokemonListUrl); */
-            setNextUrl(nextPokemonListUrl);
+            //  se actualiza aquí sin forzar la recreación de la función
+            setNextUrl((prevUrl) => nextPokemonListUrl || prevUrl);
             const pokemonArray = [];
 
             for await (const pokemon of pokemonResponse ) {
@@ -43,7 +47,7 @@ export default function PokedexScreen() {
         } finally {
             setLoading(false);
         }
-    }, [nextUrl, loading]);
+    }, [loading]);
 
 
     return (
