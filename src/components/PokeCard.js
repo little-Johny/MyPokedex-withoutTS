@@ -2,11 +2,13 @@ import { Text, StyleSheet, Image, Pressable } from 'react-native';
 import {LinearGradient}  from 'expo-linear-gradient';
 import React from 'react';
 import getColorByPokemonType from '../utils/getColorByPokemonType';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PokeCard({ pokeinfo }) {
-    const colors = getColorByPokemonType(pokeinfo.type)
+    const colors = getColorByPokemonType(pokeinfo.type);
+    const navigation = useNavigation();
     const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
-    const goToPokemon = () => console.log(`We are going to pokemon # ${pokeinfo.name}`);
+    const goToPokemon = () => navigation.navigate('Pokemon', { id: pokeinfo.id });
 
     return (
         <Pressable onPress={goToPokemon} style={styles.card}>

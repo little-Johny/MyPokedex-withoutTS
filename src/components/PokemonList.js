@@ -13,7 +13,7 @@ export default function PokemonList({ items, loadPokemons, isNext, isLoading }) 
     }
     return (
         <FlatList
-            data={items} 
+            data={items}  
             numColumns={2}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item) => String(item.id)}
@@ -37,7 +37,7 @@ export default function PokemonList({ items, loadPokemons, isNext, isLoading }) 
 const style = StyleSheet.create({
     flatListContentContainer: {
         paddingHorizontal: 5,
-        marginTop: Platform.OS === 'android' ? 80 : 60,
+        marginTop: 50,
     },
     spinner: {
         marginTop: 20,

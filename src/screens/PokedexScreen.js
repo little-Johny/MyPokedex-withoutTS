@@ -1,10 +1,10 @@
-import { Button, SafeAreaView, Text } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import React, { useState, useEffect, useCallback } from 'react';
 import { getPokemonsApi, getPokemonDetailByUrlApi } from '../api/pokemon';
 import PokemonList from '../components/PokemonList';
 
 
-export default function PokedexScreen({ navigation }) {
+export default function PokedexScreen() {
     const [ pokemons, setPokemons ] = useState([]);
     const [ nextUrl, setNextUrl ] = useState(null);
     const [ loading, setLoading ] = useState(false);
@@ -45,18 +45,15 @@ export default function PokedexScreen({ navigation }) {
         }
     }, [nextUrl, loading]);
 
-    const goToPokemon = () => navigation.navigate('Pokemon');
 
     return (
         <SafeAreaView>
-            <Text>PokedexScreen</Text> 
             <PokemonList 
                 items={pokemons} 
                 loadPokemons={loadPokemons} 
                 isNext={nextUrl}
                 isLoading={loading}
             />
-            <Button onPress={goToPokemon} title='Pokemon'/>
         </SafeAreaView>
     )
 }
