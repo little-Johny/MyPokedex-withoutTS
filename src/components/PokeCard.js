@@ -1,5 +1,5 @@
 import { Text, StyleSheet, Image, Pressable } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import {LinearGradient}  from 'expo-linear-gradient';
 import React from 'react';
 import getColorByPokemonType from '../utils/getColorByPokemonType';
 

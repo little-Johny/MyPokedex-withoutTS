@@ -1,24 +1,29 @@
 import { Button, SafeAreaView, Text } from 'react-native'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { getPokemonsApi, getPokemonDetailByUrlApi } from '../api/pokemon';
 import PokemonList from '../components/PokemonList';
 
 
-export default function PokedexScreen(props) {
+export default function PokedexScreen({ navigation }) {
     const [ pokemons, setPokemons ] = useState([]);
+    const [ nextUrl, setNextUrl ] = useState(null);
+    const [ loading, setLoading ] = useState(false);
     console.log(pokemons);
     useEffect(() =>{
-        (async () => {
-            await loadPokemons();
-        })();
+        loadPokemons();
     }, []);
 
-    const loadPokemons = async () => {
+    const loadPokemons = useCallback( async () => {
+        if(loading) return; //Evitamos llamadas innecesarias  si ya esta cargando
+
         try {
-            const response = await getPokemonsApi();
+            setLoading(true);
+            const { results: pokemonResponse, next: nextPokemonListUrl } = await getPokemonsApi(nextUrl);
+            /* console.log(pokemonResponse,`next:`, nextPokemonListUrl); */
+            setNextUrl(nextPokemonListUrl);
             const pokemonArray = [];
 
-            for await (const pokemon of response.results ) {
+            for await (const pokemon of pokemonResponse ) {
                 /* console.log(pokemon); */
                 const pokemonDetail = await getPokemonDetailByUrlApi(pokemon.url);
                 /* console.log(pokemonDetail); */
@@ -32,20 +37,25 @@ export default function PokedexScreen(props) {
                 });
             }
 
-            setPokemons([...pokemons, ...pokemonArray]);
+            setPokemons(prevPokemons => [...prevPokemons, ...pokemonArray]);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
-    }
+    }, [nextUrl, loading]);
 
-    const { navigation } = props;
-    const goToPokemon = ()=> (
-        navigation.navigate('Pokemon')
-    );
+    const goToPokemon = () => navigation.navigate('Pokemon');
+
     return (
         <SafeAreaView>
             <Text>PokedexScreen</Text> 
-            <PokemonList items={pokemons}/>
+            <PokemonList 
+                items={pokemons} 
+                loadPokemons={loadPokemons} 
+                isNext={nextUrl}
+                isLoading={loading}
+            />
             <Button onPress={goToPokemon} title='Pokemon'/>
         </SafeAreaView>
     )
