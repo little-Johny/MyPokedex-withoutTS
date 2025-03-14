@@ -12,7 +12,9 @@ const AppStack = () => (
             component={TabNavigation}
             options={{ headerShown: false }} // Ocultar encabezado
         />
-        <Stack.Screen name='Pokemon' component={PokemonScreen} />
+        <Stack.Screen name='Pokemon' component={PokemonScreen} options={{
+            title: '', headerTransparent: true
+        }}/>
     </Stack.Navigator>
 );
 
