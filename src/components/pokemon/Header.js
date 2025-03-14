@@ -2,9 +2,9 @@ import { StyleSheet, SafeAreaView, View, Text, Image } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import getColorByPokemonType from '../../utils/getColorByPokemonType';
+import { capitalize } from '../../utils/capitalize';
 
 export default function Header({ name, order, image, types }) {
-    const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
     const colors = getColorByPokemonType(types);
     console.log(colors)
     console.log(`props`, {

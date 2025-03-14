@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getPokemonDetailsApi } from '../api/pokemon';
 import Header from '../components/pokemon/Header';
 import Type from '../components/pokemon/Type';
+import Stats from '../components/pokemon/Stats';
 
 export default function Pokemon({ route, navigation }) {
     const [pokemon, setPokemon] = useState(null);
@@ -36,6 +37,7 @@ export default function Pokemon({ route, navigation }) {
                 types={pokemon.types.map(typeInfo => typeInfo.type.name)}
             />
             <Type types={pokemon.types.map(typeInfo => typeInfo.type.name)}/>
+            <Stats stats={pokemon.stats}/>
         </ScrollView>
     )
 }

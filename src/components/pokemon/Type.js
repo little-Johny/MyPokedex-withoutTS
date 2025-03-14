@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import getColorByPokemonType from '../../utils/getColorByPokemonType';
+import { capitalize } from '../../utils/capitalize';
 
 export default function Type({ types }) {
-    const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
     return (
         <View style={styles.content}>

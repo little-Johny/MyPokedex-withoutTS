@@ -3,11 +3,11 @@ import {LinearGradient}  from 'expo-linear-gradient';
 import React from 'react';
 import getColorByPokemonType from '../utils/getColorByPokemonType';
 import { useNavigation } from '@react-navigation/native';
+import { capitalize } from '../utils/capitalize';
 
 export default function PokeCard({ pokeinfo }) {
     const colors = getColorByPokemonType(pokeinfo.type);
     const navigation = useNavigation();
-    const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
     const goToPokemon = () => navigation.navigate('Pokemon', { id: pokeinfo.id });
 
     return (
