@@ -1,5 +1,15 @@
-import { StyleSheet, FlatList, ActivityIndicator, Platform } from 'react-native'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import { 
+    StyleSheet, 
+    FlatList, 
+    ActivityIndicator, 
+    Platform 
+} from 'react-native';
+import 
+    React, { 
+        useCallback, 
+        useEffect, 
+        useMemo 
+    } from 'react';
 import PokeCard from './PokeCard';
 
 

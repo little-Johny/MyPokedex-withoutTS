@@ -1,4 +1,10 @@
-import { StyleSheet, SafeAreaView, View, Text, Image } from 'react-native';
+import { 
+    StyleSheet, 
+    SafeAreaView, 
+    View, 
+    Text, 
+    Image 
+} from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import getColorByPokemonType from '../../utils/getColorByPokemonType';
