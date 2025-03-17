@@ -5,14 +5,17 @@ import { getPokemonDetailsApi } from '../api/pokemon';
 import Header from '../components/pokemon/Header';
 import Type from '../components/pokemon/Type';
 import Stats from '../components/pokemon/Stats';
+import Favorite from '../components/pokemon/Favorite';
+import useAuth from './../hooks/useAuth';
 
 export default function Pokemon({ route, navigation }) {
     const [pokemon, setPokemon] = useState(null);
     const { params } = route;
+    const { user } = useAuth();
 
     useEffect(() => {
         navigation.setOptions({
-            headerRight: () => null,
+            headerRight: () => user ? <Favorite id={pokemon?.id}/> : null,
             headerLeft: () => (
                 <Icon 
                     name='arrow-left' 
@@ -23,7 +26,7 @@ export default function Pokemon({ route, navigation }) {
                 />
             ),
         });
-    }, [navigation, params]);
+    }, [navigation, params, pokemon]);
 
     //ejecutar peticion
     useEffect(() => {
