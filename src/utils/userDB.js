@@ -1,3 +1,5 @@
+import image from './../assets/tony.jpg';
+
 export const user = {
     username: 'toby',
     password: 'toby3312',
@@ -8,5 +10,5 @@ export const userDetails = {
     firstName: 'Toby',
     lastName: 'Stark',
     email: 'tobyStark@gmail.com',
-    image: './../assets/tony.jpg',
+    image,
 }

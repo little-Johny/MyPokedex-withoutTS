@@ -4,11 +4,11 @@ import UserData from '../components/Auth/UserData';
 import useAuth from '../hooks/useAuth';
 
 export default function AccountScreen() {
-    const { auth } = useAuth();
+    const { user } = useAuth();
 
     return (
         <View>
-            {auth ? <UserData/> : <LoginForm/>}
+            {user ? <UserData/> : <LoginForm/>}
         </View>
     )
 }
