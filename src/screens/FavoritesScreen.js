@@ -1,7 +1,7 @@
 import { View, Text, Button } from 'react-native';
 import React, { useCallback, useState } from 'react';
-import { getPokemonFavoriteApi } from '../api/favorite';
 import { useFocusEffect } from '@react-navigation/native';
+import { getPokemonFavoriteApi, isPokemonFavoriteApi } from '../api/favorite';
 
 export default function FavoritesScreen() {
     const [ favorites, setFavorites ] = useState();

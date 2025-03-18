@@ -19,3 +19,12 @@ export async function getPokemonFavoriteApi() {
         throw error;
     }
 }
+
+export async function isPokemonFavoriteApi(id) {
+    try {
+        const favorites = await getPokemonFavoriteApi(); //obtenemos el listado de favoritos
+        return Array.isArray(favorites) && favorites.includes(id); //verificamos que sea un array y si lo es, miramos que el array incluya el id
+    } catch (error) {
+        throw error;
+    }
+}
