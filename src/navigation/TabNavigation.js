@@ -39,7 +39,7 @@ const screensOptions = [
 // Tab Navigation
 export default function TabNavigation() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator initialRouteName='Pokedex'>
             {screensOptions.map((screen, index) => (
                 <Tab.Screen
                     key={index}
