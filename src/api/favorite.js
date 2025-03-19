@@ -28,3 +28,14 @@ export async function isPokemonFavoriteApi(id) {
         throw error;
     }
 }
+
+export async function removePokemonFavoriteApi(id) {
+    try {
+        const favorites = await getPokemonFavoriteApi(); // Obtener la lista de favoritos
+        const newFavorites = favorites.filter(favId => favId !== id); // Eliminar el id de la lista
+        await AsyncStorage.setItem(FAVORITE_STORAGE, JSON.stringify(newFavorites)); // Almacenar nueva lista
+        console.log(`Favorites after removal:`, newFavorites);
+    } catch (error) {
+        throw error;
+    }
+}
