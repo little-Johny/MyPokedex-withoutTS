@@ -1,17 +1,38 @@
 import { View, Text, Button } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { getPokemonFavoriteApi, isPokemonFavoriteApi } from '../api/favorite';
+import { getPokemonFavoriteApi } from './../api/favorite';
+import { getPokemonDetailsApi } from './../api/pokemon';
+import useAuth from './../hooks/useAuth';
+import PokemonList from './../components/PokemonList';
 
 export default function FavoritesScreen() {
-    const [ favorites, setFavorites ] = useState();
+    const { user } = useAuth();
+    const [ favorites, setFavorites ] = useState([]);
 
     const loadFavorites = async () => {
         try {
             console.log(`Getting favorites...`);
-            const favs = await getPokemonFavoriteApi(); // obtener pokemons favorites
-            setFavorites(Array.isArray(favs) ? favs : []); //almacenar los favoritos en un estado y si es null le asignamos un array vaio
+            const favs = ( await getPokemonFavoriteApi()) || []; // obtener pokemons favorites
+            
+            const pokemonArray = [];
+            
+            for (const id of favs ) {
+                /* console.log(pokemon); */
+                const pokemonDetail = await getPokemonDetailsApi(id);
+                /* console.log(pokemonDetail); */
+
+                pokemonArray.push({
+                    id: pokemonDetail.id,
+                    name: pokemonDetail.name,
+                    type: pokemonDetail.types.map(typeInfo => typeInfo.type.name),
+                    order: pokemonDetail.order,
+                    image: pokemonDetail.sprites.other['official-artwork'].front_default,
+                });
+            }
+            
             console.log(favs);
+            setFavorites(pokemonArray);
         } catch (error) {
             console.log(error);
         }
@@ -21,15 +42,24 @@ export default function FavoritesScreen() {
     //Ejecucion al abrir pantalla
     useFocusEffect(
         useCallback(() => {
-            loadFavorites();
-            return () => console.log(`leaving favorites`);
-        }, [])
+            if (user) {
+                loadFavorites();
+                return () => console.log(`leaving favorites`);
+            }
+        }, [user])
     );
 
-    return (
-        <View>
-            <Text>FavoritesScreen</Text>
-            <Button title='Get Favorites' onPress={loadFavorites} />
-        </View>
-    )
+    return user ? (
+        <>
+            <PokemonList 
+                items={favorites} 
+            />
+            <View>
+                <Button title='Get Favorites' onPress={loadFavorites} />
+            </View>
+        </>
+    ) : (
+        <Text>Usuario no registrado</Text>
+    );
+
 }
