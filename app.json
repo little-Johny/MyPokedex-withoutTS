@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -14,10 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.little-johny.pokedex"
+      "bundleIdentifier": "com.littlejohny.pokedex"
     },
     "android": {
-      "package": "com.little-johny.pokedex",
+      "package": "com.littlejohny.pokedex",
       "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -29,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "tu-project-id"
+        "projectId": "54e2225f-f356-47d5-921c-a6ca7359fdcf"
       }
-    }
+    },
+    "owner": "little-johny"
   }
 }
